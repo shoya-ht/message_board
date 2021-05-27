@@ -15,24 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 import models.Message;
 import utils.DBUtil;
 
-/**
- * Servlet implementation class CreateServlet
- */
+
 @WebServlet("/create")
 public class CreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public CreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         String _token=(String)request.getParameter("_token");
@@ -40,9 +32,6 @@ public class CreateServlet extends HttpServlet {
             EntityManager em=DBUtil.createEntityManager();
 
             Message m=new Message();
-
-            String title=request.getParameter("title");
-            m.setTitle(title);
 
             String content=request.getParameter("content");
             m.setContent(content);

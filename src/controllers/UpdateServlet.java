@@ -16,25 +16,15 @@ import models.Message;
 import utils.DBUtil;
 import validators.MessageValidator;
 
-
-/**
- * Servlet implementation class UpdateServlet
- */
 @WebServlet("/update")
 public class UpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public UpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         String _token=(String)request.getParameter("_token");
@@ -43,8 +33,6 @@ public class UpdateServlet extends HttpServlet {
 
             Message m=em.find(Message.class, (Integer)(request.getSession().getAttribute("message_id")));
 
-            String title=request.getParameter("title");
-                    m.setTitle(title);
             String content=request.getParameter("content");
                     m.setContent(content);
             Timestamp currentTime= new Timestamp(System.currentTimeMillis());
@@ -70,15 +58,6 @@ public class UpdateServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath()+"/index");
 
             }
-
-            em.getTransaction().begin();
-            em.getTransaction().commit();
-            request.getSession().setAttribute("flush","更新が完了しました");
-            em.close();
-
-            request.getSession().removeAttribute("message_id");
-
-            response.sendRedirect(request.getContextPath()+"/index");
 
         }
     }
